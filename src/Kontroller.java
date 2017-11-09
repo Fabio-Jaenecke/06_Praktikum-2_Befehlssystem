@@ -3,7 +3,7 @@
  * {@link Befehl Befehl} und lösst die dazu 
  * passenden Aktionen aus.
  * 
- * @author tebe
+ * @author daniellerch
  *
  */
 public class Kontroller {
@@ -17,20 +17,8 @@ public class Kontroller {
 	public boolean verarbeiteBefehl(Befehl befehl) {
 		boolean macheWeiter = true;
 		String befehlswort = befehl.gibBefehlswort();
-		if (Befehlswort.istBefehl(befehlswort)) {
-
-			if (befehlswort.equals("gehe")) {
-				System.out.println("Befehl GEHE " + befehl.gibZweitesWort() + " wird ausgefuehrt");
-			} else if (befehlswort.equals("hilfe")) {
-				System.out.println("Gueltige Befehle: "
-						+ Befehlswort.gibBefehlsworteAlsText());
-			} else if (befehlswort.equals("beenden")) {
-				System.out.println("Befehl BEENDEN wird ausgefuehrt.");
-				macheWeiter = false;
-			} else {
-				System.out.println("Befehlswort ohne zugehoerige Aktion: Abbruch.");
-				macheWeiter = false;
-			}
+		if (Befehlswort.gibBefehlsworteAlsText().contains(befehlswort) && befehlswort != "unbekannt") {
+			System.out.println("Der Befehl " + befehl.gibBefehlswort() + " " + befehl.gibZweitesWort() + " wird ausgeführt.");
 		} else {
 			System.out.println("Ich weiss nicht, was Sie meinen...");
 		}

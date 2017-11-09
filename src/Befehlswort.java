@@ -1,53 +1,69 @@
-import java.util.ArrayList;
-import java.util.HashSet;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 /**
- * Diese Klasse haelt eine Aufzaehlung der akzeptierten Befehlswoerter.
- * Mit ihrer Hilfe werden eingetippte Befehle erkannt.
+ * Diese Klasse haelt eine Aufzaehlung der akzeptierten Befehlswoerter. Mit
+ * ihrer Hilfe werden eingetippte Befehle erkannt.
  *
- * @author  tebe
+ * @author daniellerch
  * @version 1.0
  */
-public class Befehlswort {
+public enum Befehlswort {
+	UNBEKANNT("unbekannt"), 
+	GEHE("gehe"), 
+	HILFE("hilfe"), 
+	BEENDEN("beenden");
 
-	// Ein HashSet mit den gueltigen Befehlswoertern als Klassenvariable
-	private static final HashSet<String> gueltigeBefehle = new HashSet<String>();
-	static {
-		gueltigeBefehle.add("gehe");
-		gueltigeBefehle.add("beenden");
-		gueltigeBefehle.add("hilfe");
-	}
-
-	/**
-	 * Konstruktor - initialisiere die Befehlswörter.
-	 */
-	public Befehlswort()
-	{
-		// tut momentan nichts
-	}
+	// Das Befehlswort als Zeichenkette.
+	private String befehl = "";
 
 	/**
-	 * Pruefe, ob eine gegebene Zeichenkette ein gueltiger
-	 * Befehl ist.
+	 * Konstruktor für Befehlswort, welcher das Datenfeld befehl setzt
 	 * 
-	 * @return 'true', wenn die gegebene Zeichenkette ein gueltiger
-	 *         Befehl ist, 'false' sonst.
+	 * @param befehl der Befehl als Zeichenkette
 	 */
-	public static boolean istBefehl(String eingabe)
-	{
-		return gueltigeBefehle.contains(eingabe);
+	Befehlswort(String befehl) {
+		this.befehl = befehl;
 	}
 
 	/**
-	 * Gibt die akzeptierten Befehlsworte als Text zurueck.
+	 * gibt das zugehörige Befehlswort Enum zurück
 	 * 
-	 * @return Die akzeptierten Befehlsworte als Text
+	 * @param wort
+	 * @return das zum Befehlswort gehörenden Enum Objekt. Für unbekannte Werte
+	 *         von wort wird das Enum Objekt UNBEKANNT zurückgegeben werden.
+	 */
+
+	public static Befehlswort gibBefehlswort(String wort) {
+		Befehlswort befehlswort = UNBEKANNT;
+		for (Befehlswort b : Befehlswort.values()) {
+			if (b.getBefehl().equals(wort)) {
+				befehlswort = b;
+			}
+		}
+		return befehlswort;
+
+	}
+
+	/**
+	 * Gibt die gültigen Befehlsworte durch Leerzeichen getrennt als String
+	 * zurück.
+	 * 
 	 */
 	public static String gibBefehlsworteAlsText() {
-		String text = "";
-		for (String befehl : gueltigeBefehle) {
-			text = text + befehl + " ";
+		String befehlsworteAlsText = "";
+		for (Befehlswort b : Befehlswort.values()) {
+			befehlsworteAlsText = befehlsworteAlsText + " " +  b.getBefehl();
 		}
-		return text;
+		return befehlsworteAlsText;
 	}
+
+	/**
+	 * getter für befehl
+	 * 
+	 * @return befehl der Befehl als Zeichenkette
+	 */
+	public String getBefehl() {
+		return befehl;
+	}
+
 }
