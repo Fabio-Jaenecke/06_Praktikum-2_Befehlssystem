@@ -3,7 +3,8 @@
  * {@link Befehl Befehl} und lösst die dazu 
  * passenden Aktionen aus.
  * 
- * @author daniellerch
+ * @author daniellerch, fabiojaenecke
+ * @version 1.1
  *
  */
 public class Kontroller {
@@ -17,8 +18,17 @@ public class Kontroller {
 	public boolean verarbeiteBefehl(Befehl befehl) {
 		boolean macheWeiter = true;
 		String befehlswort = befehl.gibBefehlswort();
-		if (Befehlswort.gibBefehlsworteAlsText().contains(befehlswort) && befehlswort != "unbekannt") {
-			System.out.println("Der Befehl " + befehl.gibBefehlswort() + " " + befehl.gibZweitesWort() + " wird ausgeführt.");
+		String secondword = befehl.gibZweitesWort();
+		if (Befehlswort.gibBefehlsworteAlsText().contains(befehlswort)) {
+			String print2ndWord = " ";
+			if (befehl.hatZweitesWort()) {
+				if (Befehlswort.gibBefehlsworteAlsText().contains(secondword)) {
+					print2ndWord = " " + befehl.gibZweitesWort() + " ";
+				} else {
+					System.out.println("Ich weiss nicht, was Sie nach '" + befehlswort + "' meinen...");
+				}
+			}
+			System.out.println("Der Befehl " + befehl.gibBefehlswort() + print2ndWord + "wird ausgeführt.");
 		} else {
 			System.out.println("Ich weiss nicht, was Sie meinen...");
 		}
