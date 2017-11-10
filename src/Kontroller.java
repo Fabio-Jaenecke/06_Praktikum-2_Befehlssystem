@@ -20,12 +20,16 @@ public class Kontroller {
 		String befehlswort = befehl.gibBefehlswort();
 		String secondword = befehl.gibZweitesWort();
 		if (Befehlswort.gibBefehlsworteAlsText().contains(befehlswort)) {
+			if (Befehlswort.gibBefehlswort(befehlswort).equals(Befehlswort.BEENDEN)) {
+				macheWeiter = false;
+			}
 			String print2ndWord = " ";
 			if (befehl.hatZweitesWort()) {
 				if (Befehlswort.gibBefehlsworteAlsText().contains(secondword)) {
 					print2ndWord = " " + befehl.gibZweitesWort() + " ";
 				} else {
-					System.out.println("Ich weiss nicht, was Sie nach '" + befehlswort + "' meinen...");
+						System.out.println("Ich weiss nicht, was Sie nach '" + befehlswort + "' meinen...");
+					
 				}
 			}
 			System.out.println("Der Befehl " + befehl.gibBefehlswort() + print2ndWord + "wird ausgeführt.");
