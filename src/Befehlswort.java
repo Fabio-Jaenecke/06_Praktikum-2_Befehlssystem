@@ -48,11 +48,15 @@ public enum Befehlswort {
 	 * Gibt die gültigen Befehlsworte durch Leerzeichen getrennt als String
 	 * zurück.
 	 * 
+	 * Das Enum UNBEKANNT wird nicht als Text ausgegeben.s
+	 * 
 	 */
 	public static String gibBefehlsworteAlsText() {
 		String befehlsworteAlsText = "";
 		for (Befehlswort b : Befehlswort.values()) {
+			if (b != UNBEKANNT) {
 			befehlsworteAlsText = befehlsworteAlsText + " " +  b.getBefehl();
+			}
 		}
 		return befehlsworteAlsText;
 	}
